@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  - const results = [{ material: "Acrylic", style: 'Abstract', price: 100 }, { material: "Oil", style: 'Realistic', price: "200" }, { material: "Watercolor", style: 'Impressionistic', price: 150 }]
+  div(class='container-fluid')
+    each result, index in results
+      div(class='row', onclick=`buy(${index})`)
+        div(class='col-sm-2') #{result.material} 
+        div(class='col-sm-2') #{result.style} 
+        div(class='col-sm-2') #{result.price}
+
+  script.
+    function buy(index) {
+      alert('You purchased item ' + index);
+    }
