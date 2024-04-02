@@ -1,9 +1,7 @@
 var express = require('express');
+const upliftedartwork_controlers= require('../controllers/upliftedartwork');
 var router = express.Router();
 
-/* GET upliftedartwork page. */
-router.get('/', function(req, res, next) {
-  res.render('upliftedartwork', { title: 'Search Results - Uplifted Artwork' });
-});
+router.get('/', upliftedartwork_controlers.upliftedartwork_view_all_Page );
 
 module.exports = router;
