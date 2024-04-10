@@ -25,6 +25,21 @@ exports.upliftedartwork_view_all_Page = async function (req, res) {
   }
 };
 
+// Handle a show one view with id specified by query
+exports.upliftedartwork_view_one_Page = async function (req, res) {
+  console.log("single view for id " + req.query.id);
+  try {
+    result = await Upliftedartwork.findById(req.query.id);
+    res.render("upliftedartworkdetail", {
+      title: "Upliftedartwork Detail",
+      toShow: result,
+    });
+  } catch (err) {
+    res.status(500);
+    res.send(`{'error': '${err}'}`);
+  }
+};
+
 // for a specific upliftedartwork.
 exports.upliftedartwork_detail = async function (req, res) {
   console.log("detail" + req.params.id);
@@ -59,8 +74,16 @@ exports.upliftedartwork_create_post = async function (req, res) {
 };
 
 // Handle upliftedartwork delete from on DELETE.
-exports.upliftedartwork_delete = function (req, res) {
-  res.send("NOT IMPLEMENTED: upliftedartwork delete DELETE " + req.params.id);
+exports.upliftedartwork_delete = async function (req, res) {
+  console.log("delete " + req.params.id);
+  try {
+    result = await Upliftedartwork.findByIdAndDelete(req.params.id);
+    console.log("Removed " + result);
+    res.send(result);
+  } catch (err) {
+    res.status(500);
+    res.send(`{"error": Error deleting ${err}}`);
+  }
 };
 
 // Handle upliftedartwork update form on PUT.
@@ -82,3 +105,18 @@ ${JSON.stringify(req.body)}`);
 failed`);
   }
 };
+
+
+// Handle building the view for creating a upliftedartwork.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.upliftedartwork_create_Page = function(req, res) {
+  console.log("create view")
+  try{
+  res.render('upliftedartworkcreate', { title: 'Upliftedartwork Create'});
+  }
+  catch(err){
+  res.status(500)
+  res.send(`{'error': '${err}'}`);
+  }
+ };

@@ -1,0 +1,20 @@
+extends layout
+block content
+ h1= title
+ - let upliftedartworkid = toShow._id
+ - let upliftedartwork_material = toShow.material
+ - let upliftedartwork_style = toShow.style
+ - let upliftedartwork_price = toShow.price
+ div
+  div.row
+   div(class='upliftedartworkAttr mr-3') Upliftedartwork ID is:
+   div #{upliftedartworkid}
+  div.row
+   div(class='upliftedartworkAttr mr-3') Upliftedartwork Material is:
+   div #{upliftedartwork_material}
+  div.row
+   div(class='upliftedartworkAttr mr-3') Upliftedartwork Style is:
+   div #{upliftedartwork_style}
+  div.row
+   div(class='upliftedartworkAttr mr-3') Upliftedartwork Price is:
+   div #{upliftedartwork_price}
