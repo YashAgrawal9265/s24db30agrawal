@@ -1,0 +1,40 @@
+extends layout
+block content
+  h1= title
+  - let upliftedartworkid = toShow._id
+  - let material = toShow.material
+  - let style = toShow.style
+  - let price = toShow.price
+
+  div.row(class='mb-2')
+    div.mr-1 ID is
+      div #{upliftedartworkid}
+    - let actionid = "/resource/upliftedartworks/" + upliftedartworkid
+    form(id='upliftedartworkForm', action= actionid, method="PUT")
+      div.form-group
+        label.upliftedartworkAttr(for='material') Artist name
+        input#material(type='text', name='material', value= material )
+      div.form-group
+        label.upliftedartworkAttr(for='style') Artist Masterpiece cost
+        input#style(type='text', name='style', value= style )
+      div.form-group
+        label.upliftedartworkAttr(for='price') Artist Masterpiece Name
+        input#price(type='number', name='price', value= price )
+      input(type="submit")
+  script.
+    document.forms['upliftedartworkForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Update succeeded")
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Update failed " + error )
+      });
+    });

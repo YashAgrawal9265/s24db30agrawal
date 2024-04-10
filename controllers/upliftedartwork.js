@@ -106,17 +106,46 @@ failed`);
   }
 };
 
-
 // Handle building the view for creating a upliftedartwork.
 // No body, no in path parameter, no query.
 // Does not need to be async
-exports.upliftedartwork_create_Page = function(req, res) {
-  console.log("create view")
-  try{
-  res.render('upliftedartworkcreate', { title: 'Upliftedartwork Create'});
+exports.upliftedartwork_create_Page = function (req, res) {
+  console.log("create view");
+  try {
+    res.render("upliftedartworkcreate", { title: "Upliftedartwork Create" });
+  } catch (err) {
+    res.status(500);
+    res.send(`{'error': '${err}'}`);
   }
-  catch(err){
-  res.status(500)
-  res.send(`{'error': '${err}'}`);
+};
+
+// Handle building the view for updating a upliftedartwork.
+// query provides the id
+exports.upliftedartwork_update_Page = async function (req, res) {
+  console.log("update view for item " + req.query.id);
+  try {
+    let result = await Upliftedartwork.findById(req.query.id);
+    res.render("upliftedartworkupdate", {
+      title: "Upliftedartwork Update",
+      toShow: result,
+    });
+  } catch (err) {
+    res.status(500);
+    res.send(`{'error': '${err}'}`);
   }
- };
+};
+
+// Handle a delete one view with id from query
+exports.upliftedartwork_delete_Page = async function (req, res) {
+  console.log("Delete view for id " + req.query.id);
+  try {
+    result = await Upliftedartwork.findById(req.query.id);
+    res.render("upliftedartworkdelete", {
+      title: "Upliftedartwork Delete",
+      toShow: result,
+    });
+  } catch (err) {
+    res.status(500);
+    res.send(`{'error': '${err}'}`);
+  }
+};

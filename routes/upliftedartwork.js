@@ -13,4 +13,10 @@ router.get('/upliftedartworks/:id', upliftedartwork_controlers.upliftedartwork_d
 /* GET create upliftedartwork page */
 router.get('/create', upliftedartwork_controlers.upliftedartwork_create_Page);
 
+/* GET create update page */
+router.get('/update', upliftedartwork_controlers.upliftedartwork_update_Page);
+
+/* GET delete upliftedartwork page */
+router.get('/delete', upliftedartwork_controlers.upliftedartwork_delete_Page);
+
 module.exports = router;
