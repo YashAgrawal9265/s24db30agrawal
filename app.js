@@ -7,10 +7,28 @@ var logger = require("morgan");
 var Upliftedartwork = require("./models/upliftedartwork");
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
-// passport config
-// Use the existing connection
-// The Account model
-var Account =require('./models/account');
+
+passport.use(
+  new LocalStrategy(function (username, password, done) {
+    Account.findOne({ username: username })
+      .then(function (user) {
+        if (err) {
+          return done(err);
+        }
+        if (!user) {
+          return done(null, false, { message: "Incorrect username." });
+        }
+        if (!user.validPassword(password)) {
+          return done(null, false, { message: "Incorrect password." });
+        }
+        return done(null, user);
+      })
+      .catch(function (err) {
+        return done(err);
+      });
+  })
+);
+
 
 const connectionString = process.env.MONGO_CON;
 mongoose = require("mongoose");
@@ -113,30 +131,15 @@ app.use("/grid", gridRouter);
 app.use("/randomitem", randomItemRouter);
 app.use("/resource", resourceRouter);
 
+// passport config
+// Use the existing connection
+// The Account model
+var Account =require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
-passport.use(
-  new LocalStrategy(function (username, password, done) {
-    Account.findOne({ username: username })
-      .then(function (user) {
-        if (err) {
-          return done(err);
-        }
-        if (!user) {
-          return done(null, false, { message: "Incorrect username." });
-        }
-        if (!user.validPassword(password)) {
-          return done(null, false, { message: "Incorrect password." });
-        }
-        return done(null, user);
-      })
-      .catch(function (err) {
-        return done(err);
-      });
-  })
-);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

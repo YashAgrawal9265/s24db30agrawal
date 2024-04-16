@@ -1,18 +1,9 @@
-extends layout
-
-block content
-  h1 Yash Jagdishkumar Agrawal
-  p Welcome to Assignment11
-  button(type="button", class="btn btn-primary" onclick="double()") I am a button
-  div#double Up the amount.
-  a(href='/upliftedartwork') Uplifted Artwork
-
-  script.
-    var value = 0;
-    var power = 1;
-
-    function double() {
-      value += 1;
-      power *= 2;
-      document.getElementById('double').innerText = `Two to the power ${value} is ${power}`;
-    } 
+if (!user)
+  a(href="/login") Login
+  br
+  a(href="/register") Register
+if (user)
+  p You are currently logged in as #{user.username}
+  a(href="/upliftedartwork") Take me to upliftedartwork
+  br
+  a(href="/logout") Logout

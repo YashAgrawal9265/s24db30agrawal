@@ -12,13 +12,13 @@ block content
     - let actionid = "/resource/upliftedartworks/" + upliftedartworkid
     form(id='upliftedartworkForm', action= actionid, method="PUT")
       div.form-group
-        label.upliftedartworkAttr(for='material') Artist name
+        label.upliftedartworkAttr(for='material') Upliftedartwork Material
         input#material(type='text', name='material', value= material )
       div.form-group
-        label.upliftedartworkAttr(for='style') Artist Masterpiece cost
+        label.upliftedartworkAttr(for='style') Upliftedartwork Style
         input#style(type='text', name='style', value= style )
       div.form-group
-        label.upliftedartworkAttr(for='price') Artist Masterpiece Name
+        label.upliftedartworkAttr(for='price') Upliftedartwork Price
         input#price(type='number', name='price', value= price )
       input(type="submit")
   script.
