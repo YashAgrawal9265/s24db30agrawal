@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const upliftedartworkSchema = mongoose.Schema({
-    material: String,
     material:{ 
         type: String, 
         enum: ['Oil', 'Watercolor','Acrylic'], 
