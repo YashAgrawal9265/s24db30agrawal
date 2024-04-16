@@ -52,6 +52,7 @@ router.get('/login', function (req, res) {
   res.render('login', { title: 'Upliftedartworks App Login', user: req.user });
 });
 
+
 router.post('/login', passport.authenticate('local'), function (req, res) {
   res.redirect('/');
 });
