@@ -4,7 +4,7 @@ const upliftedartworkSchema = mongoose.Schema({
         type: String, 
         enum: ['Oil', 'Watercolor','Acrylic'], 
         required: function() { 
-            return this.material_name;
+            return this.material;
         }
     },
     style: String,
